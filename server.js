@@ -1,8 +1,14 @@
 // express.js is a web application framework for Node.js, released as free and open source sof
 const express = require('express');
+const connectDB = require('./config/db');
+const env = require('dotenv').config();
 // initialize express into variable app
 const app = express();
 
+// Connect Database
+connectDB();
+// init Middleware
+app.use(express.json({ extended: false }));
 // specify get request , and response to the request
 app.get('/', (req, res) =>
   res.json({ msg: 'Welcome to the Contact Keeper API...' })
