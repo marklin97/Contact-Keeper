@@ -1,24 +1,30 @@
-// express.js is a web application framework for Node.js, released as free and open source sof
 const express = require('express');
 const connectDB = require('./config/db');
-const env = require('dotenv').config();
-// initialize express into variable app
+const path = require('path');
+
 const app = express();
 
 // Connect Database
 connectDB();
-// init Middleware
+
+// Init Middleware
 app.use(express.json({ extended: false }));
-// specify get request , and response to the request
-app.get('/', (req, res) =>
-  res.json({ msg: 'Welcome to the Contact Keeper API...' })
-);
 
 // Define Routes
 app.use('/api/users', require('./routes/users'));
 app.use('/api/auth', require('./routes/auth'));
-app.use('/api/contacts', require('./routes/contact'));
+app.use('/api/contacts', require('./routes/contacts'));
+
+// Serve static assets in production
+if (process.env.NODE_ENV === 'production') {
+  // Set static folder
+  app.use(express.static('client/build'));
+
+  app.get('*', (req, res) =>
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+  );
+}
 
 const PORT = process.env.PORT || 5000;
-// app takes a port to listen
-app.listen(PORT, () => console.log(`Server start on port ${PORT}`));
+
+app.listen(PORT, () => console.log(`Server started on port ${PORT}`));

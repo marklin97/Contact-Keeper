@@ -1,13 +1,22 @@
 import React, { useState, useContext, useEffect } from 'react';
 import ContactContext from '../context/contactContext';
+
+
 const ContactForm = () => {
   const contactContext = useContext(ContactContext);
 
-  const { addContact, current, clearCurrent, updateContact } = contactContext;
+  const { addContact, updateContact, clearCurrent, current } = contactContext;
 
   useEffect(() => {
     if (current !== null) {
       setContact(current);
+    } else {
+      setContact({
+        name: '',
+        email: '',
+        phone: '',
+        type: 'personal'
+      });
     }
   }, [contactContext, current]);
 
@@ -18,33 +27,24 @@ const ContactForm = () => {
     type: 'personal'
   });
 
-  const clearAll = () => {
-    clearCurrent();
-    setContact({
-      name: '',
-      email: '',
-      phone: '',
-      type: 'personal'
-    });
-  };
-  // function alert(event) { //
+  const { name, email, phone, type } = contact;
 
-  // ... spread operators fetch everything from contact object
   const onChange = e =>
     setContact({ ...contact, [e.target.name]: e.target.value });
 
   const onSubmit = e => {
     e.preventDefault();
-    if (current == null) {
+    if (current === null) {
       addContact(contact);
     } else {
       updateContact(contact);
     }
-
     clearAll();
   };
 
-  const { name, email, phone, type } = contact;
+  const clearAll = () => {
+    clearCurrent();
+  };
 
   return (
     <form onSubmit={onSubmit}>

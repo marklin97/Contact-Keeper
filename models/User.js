@@ -16,6 +16,10 @@ const UserSchema = mongoose.Schema({
   date: {
     type: Date,
     default: Date.now
+  },
+  confirmed: {
+    type: Boolean,
+    default: false
   }
 });
 module.exports = mongoose.model('user', UserSchema);
