@@ -5,8 +5,11 @@
 
 ## Built With
 React - The front-end framwork
+
 Node.js && Express - Backend framwork
+
 MongoDB - Database
+
 Font Awesome - Icon library 
 
 ## Usage
@@ -29,3 +32,4 @@ npm run dev     # Express & React :3000 & :5000
 npm run server  # Express API Only :5000
 npm run client  # React Client Only :3000
 ```
+
