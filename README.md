@@ -1,7 +1,13 @@
 # Contact Keeper
 
-> Full stack MERN contact manager with React hooks, context & JWT authentication. Part of my React course on Udemy.
+> Full stack MERN contact manager with React hooks, context & JWT authentication. 
 
+
+## Built With
+React - The front-end framwork
+Node.js && Express - Backend framwork
+MongoDB - Database
+Font Awesome - Icon library 
 
 ## Usage
 
